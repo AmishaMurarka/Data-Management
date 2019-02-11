@@ -1,0 +1,81 @@
+﻿body {
+    background-image: url('back_image.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.tab {
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+    .tab button {
+        background-color: inherit;
+        float:inherit;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+    }
+
+    .tab button:hover {
+        text-decoration: underline;
+    }
+
+    .tab button.active {
+        font-size:18px;
+        color: blueviolet;
+    }
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+    animation: fadeEffect 1s;
+}
+
+@keyframes fadeEffect {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+} 
+
+.login_div {
+    width: 25%;
+    height:50%;
+    margin-top: 250px;
+    background-color: white;
+    border-radius: 20px;
+    vertical-align: middle;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    background-color: blueviolet;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+    input[type=submit]:hover {
+        opacity: 0.8;
+    }
+
+
+

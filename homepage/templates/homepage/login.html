@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login_css.css' %}" type="text/css" />
+</head>
+<body>
+    <center>
+        <div class="login_div">
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event,'Employee')" id="defaultOpen">Employee Login</button>
+                <button class="tablinks" onclick="openTab(event,'Admin')">Admin Login</button>
+            </div>
+
+            <div id="Employee" class="tabcontent">
+                <form class="login_form" id="emp_login" method="POST" action="/employee/main/">
+                    {% csrf_token %}
+                    {% if message is True %}
+                    <p>
+                        <font color="blue">
+                            **You have been successfully logged out.
+                        </font>
+                    </p>
+                    {% endif %}
+                    <input name="emp_username" id="emp_username" type="text" required placeholder="Enter username*"><br>
+                    <input name="emp_password" id="emp_password" type="password" required placeholder="Enter password*"><br><br>
+                    {% if error is True %}
+                    <p>
+                        <font color="red">
+                            **Your username and password didn't match.
+                            Please try again.
+                        </font>
+                    </p>
+                    {% endif %}
+
+                    <input type="submit" value="Login">
+                </form>
+            </div>
+
+            <div id="Admin" class="tabcontent">
+                <form class="login_form" id="admin_login" method="POST" action="/admin/main/">
+                    {% csrf_token %}
+                    {% if message is True %}
+                    <p>
+                        <font color="blue">
+                            **You have been successfully logged out.
+                        </font>
+                    </p>
+                    {% endif %}
+                    <input name="admin_username" id="admin_username" type="text" required placeholder="Enter username*"><br>
+                    <input name="admin_password" id="admin_password" type="password" required placeholder="Enter password*"><br><br>
+                    {% if error is True %}
+                    <p>
+                        <font color="red">
+                            **Your username and password didn't match.
+                            Please try again.
+                        </font>
+                    </p>
+                    {% endif %}
+
+                    <input type="submit" value="Login">
+                </form>
+            </div>
+        </div>
+    </center>
+    <script>
+        document.getElementById("defaultOpen").click();
+        function openTab(evt, cityName) {
+            var i, tabcontent, tablinks;
+
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    {% block header %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load staticfiles %}
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main_css.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'search_filter.js' %}"></script>
+    <script type="text/javascript" src="{% static 'modalscript.js' %}"></script>
+    <script type="text/javascript" src="{% static 'validations.js' %}"></script>
+
+    <title>Supply Chain Data Management And Analysis</title>
+
+    {% endblock header %}
+</head>
+<body>
+    {% block sidebar %}
+    <ul>
+        <li><a href="account.html" style="text-align:center; font-size:3vw; margin-bottom:20px; margin-top:10px;">Welcome Admin!</a></li>
+        <li><a class="active" href="{% url 'loginpage' %}">Databases</a></li>
+        <li><a href="{% url 'adminorderspage' %}">Orders</a></li>
+        <li><a href="{% url 'admincustomerpage' %}">Customers</a></li>
+        <li><a href="{% url 'adminproductpage' %}">Products</a></li>
+        <li><a href="{% url 'admincalendarpage' %}">Task Schedular</a></li>
+        <li><a href="{% url 'contactpage' %}">Contact Us</a></li>
+        <li><a href="{% url 'logoutpage' %}">Logout</a></li>
+    </ul>
+    {% endblock sidebar %}
+
+    <div class="tabs">
+        {% block content %}
+        <div align="center" style="padding-top:20px;">
+            <table border="1" cellspacing="10" cellpadding="20" style="width:50%;border-collapse:collapse; font-size:2vw; border-color:darkslateblue; border-width:10px;">
+                <tr style="color:darkcyan;">
+                    <th colspan="3">User Name: {{ username }}</th>
+                </tr>
+                <tr>
+                    <td>ProductsDB.csv:</td>
+                    <td><a href="{% url 'adminproductpage'%}">View</a></td>
+                    <td><a href="{% url 'downloadproduct'%}" target="_blank">Download</a></td>
+                </tr>
+                <tr>
+                    <td>OrdersDB.csv:</td>
+                    <td><a href="{% url 'adminorderspage'%}">View</a></td>
+                    <td><a href="{% url 'downloadorder'%}" target="_blank">Download</a></td>
+                </tr>
+                <tr>
+                    <td>CustomerDB.csv:</td>
+                    <td><a href="{% url 'admincustomerpage'%}">View</a></td>
+                    <td><a href="{% url 'downloadcustomer'%}" target="_blank">Download</a></td>
+                </tr>
+            </table>
+            <table style="border-collapse:collapse;">
+                <tr>
+                    <td>
+                        {% load static %}
+                        <img style="padding:10px; cursor:pointer;" src="{% static 'sku_vs_avg_rating.png' %}" width="1000" height="500" alt="Product VS Average Rating Bar Chart" title="Product VS Average Rating Bar Chart" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% load static %}
+                        <img style="padding:10px; cursor:pointer;" src="{% static 'sales_channels.png' %}" width="1000" height="500" alt="Sales Channel Pie Chart" title="Sales Channel Pie Chart" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% load static %}
+                        <img style="padding:10px; cursor:pointer;" src="{% static 'revenue_vs_country.png' %}" width="1000" height="500" alt="Revenue VS Country Line Graph" title="Revenue VS Country Line Graph" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% load static %}
+                        <img style="padding:10px; cursor:pointer;" src="{% static 'units_prod_vs_sold.png' %}" width="1000" height="500" alt="Units Produced vs Sold Bar Chart" title="Units Produced vs Sold Bar Chart" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        {% endblock %}
+    </div>
+
+</body>
+</html>

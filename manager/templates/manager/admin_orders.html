@@ -1,0 +1,230 @@
+{% extends 'C:\Users\Amisha\Desktop\SCM\manager\templates\manager\admin_homepage.html' %}
+
+{% block sidebar %}
+<ul>
+    <li><a href="account.html" style="text-align:center; font-size:2vw; margin-bottom:20px; margin-top:10px;">Welcome Admin!</a></li>
+    <li><a href="{% url 'loginpage' %}">Databases</a></li>
+    <li><a class="active" href="{% url 'adminorderspage' %}">Orders</a></li>
+    <li><a href="{% url 'admincustomerpage' %}">Customers</a></li>
+    <li><a href="{% url 'adminproductpage' %}">Products</a></li>
+    <li><a href="{% url 'admincalendarpage' %}">Task Schedular</a></li>
+    <li><a href="{% url 'contactpage' %}">Contact Us</a></li>
+    <li><a href="{% url 'logoutpage' %}">Logout</a></li>
+</ul>
+    {% endblock sidebar %}
+
+{% block content %}
+
+<div>
+    <div align="center">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Enter search text here.." title="Type Filter Text">
+        <select id="filter" onchange="myFunction()">
+            <option value="99">Filter by..</option>
+            <option value="0">Retailer Country</option>
+            <option value="1">Order Method Type</option>
+            <option value="2">Product Line</option>
+            <option value="3">Product Type</option>
+            <option value="4">Year</option>
+            <option value="5">Revenue</option>
+            <option value="6">Quantity</option>
+        </select>
+    </div>
+    <div align="center">
+        <button class="buttons" id="add_prod" onclick="add_modal()">Add Order</button>
+        <button class="buttons" type="submit" id="advance" onclick="adv_modal()">View Detailed Report</button>
+
+        <div id="advModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <table cellpadding="10" style="width:100%; font-size:1.2vw;">
+                    <tbody>
+                        <tr>
+                            <th colspan="2" align="center" style="font-size:3vw;">Detailed Report For Orders</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><hr /></td>
+                        </tr>
+                    </tbody>
+                    <tr style="background-color:darkslateblue; color:floralwhite;">
+                        <th align="left">Total Number Of Orders</th>
+                        <td>{{ row_count }}</td>
+                    </tr>
+                    <tr style="background-color:darkslateblue; color:floralwhite;">
+                        <th align="left">Total Number Of Countries</th>
+                        <td>{{ country }}</td>
+                    </tr>
+                    <tr style="background-color:darkslateblue; color:floralwhite;">
+                        <th align="left">Total Number Of Order Methods</th>
+                        <td>{{ method }}</td>
+                    </tr>
+                    <tr style="background-color:darkslateblue; color:floralwhite;">
+                        <th align="left">Total Number Of Product Lines</th>
+                        <td>{{ line }}</td>
+                    </tr>
+                    <tr style="background-color:darkslateblue; color:floralwhite;">
+                        <th align="left">Total Number Of Product Type</th>
+                        <td>{{ type }}</td>
+                    </tr>
+                    {% for key,value in country_wise_ord.items %}
+                    <tr style="color:floralwhite; background-color:darkcyan;">
+                        <th align="left">Number of orders in {{ key }}:</th>
+                        <td>{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% for key,value in country_wise_method.items %}
+                    <tr style="background-color:darkslateblue; color:floralwhite;">
+                        <th align="left">Number of orders in {{ key }}:</th>
+                        <td>{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% for key,value in country2_wise_method.items %}
+                    <tr style="color:floralwhite; background-color:darkcyan;">
+                        <th align="left">Number of orders in {{ key }}:</th>
+                        <td>{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr style="background-color:darkslateblue; color:floralwhite;">
+                        <th align="left">Total Number Of Years</th>
+                        <td>{{ year }}</td>
+                    </tr>
+                    {% for key,value in yearly_rev.items %}
+                    <tr style="color:floralwhite; background-color:darkcyan;">
+                        <th align="left">Revenue in year {{ key }}:</th>
+                        <td>{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr style="background-color:darkslateblue; color:floralwhite;">
+                        <th align="left">Total Revenue</th>
+                        <td>{{ revenue }}</td>
+                    </tr>
+               
+                </table>
+            </div>
+        </div>
+
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form method="post">
+                    {% csrf_token %}
+                    <h1>Add Order</h1>
+                    <p>Please fill in this form with order details to add an order.</p>
+                    <hr>
+                    <table style="width:80%; margin:50px;">
+                        <tr>
+                            <td><label for="p_no" style="text-align:left;"><b>Retailer Country:</b></label></td>
+                            <td><input type="text" placeholder="Enter Retailer Country" name="ret" id="ret" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="p_no" style="text-align:left;"><b>Order Method Type:</b></label></td>
+                            <td><input type="text" placeholder="Enter Order Method Type" name="or_no" id="or_no" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="sku"><b>Product Line:</b></label></td>
+                            <td><input type="text" placeholder="Enter Product Line" name="prod_line" id="prod_line" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="units_p"><b>Product Type:</b></label></td>
+                            <td><input type="text" placeholder="Enter product type" name="prod_typ" id="prod_typ" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="units_s"><b>Year:</b></label></td>
+                            <td><input type="number" placeholder="Enter year" name="year" id="year" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="mrp"><b>Revenue:</b></label></td>
+                            <td><input type="number" placeholder="Enter Revenue" name="rev" id="rev" required></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="rate"><b>Quantity:</b></label>
+                            </td>
+                            <td><input type="number" placeholder="Enter quantity" name="qt" id="qt" required></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><hr></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center"><button type="submit" class="buttons" onsubmit="">Add Order</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div style="display:inline;" align="center">
+        <div style="display:inline">
+            <table cellspacing="10" cellpadding="10" border="0" style="border-collapse:collapse; padding-right:10px; padding-left:10px;">
+                <tr style='font-size:2vw; text-align:center; font-weight:bold; color:darkcyan' id="rowcount">
+                    <td>
+                        {{row_count}}<br />
+                        <span style="font-size:1vw; font-weight:lighter;">Total Records</span>
+                    </td>
+                    <td width="1"><hr style="width:1px; height:80px; "></td>
+                    <td>
+                        {{ country }}<br />
+                        <span style="font-size:1vw; font-weight:lighter;">No. of countries</span>
+                    </td>
+                    <td width="1"><hr style="width:1px; height:80px; "></td>
+                    <td>
+                        {{ method }}<br />
+                        <span style="font-size:1vw; font-weight:lighter;">No. of order methods</span>
+                    </td>
+                    <td width="1"><hr style="width:1px; height:80px; "></td>
+                    <td>
+                        {{ line }}<br />
+                        <span style="font-size:1vw; font-weight:lighter;">No. of Product Lines</span>
+                    </td>
+                    <td width="1"><hr style="width:1px; height:80px; "></td>
+                    <td>
+                        {{ type }}<br />
+                        <span style="font-size:1vw; font-weight:lighter;">No. of product type</span>
+                    </td>
+                    <td width="1"><hr style="width:1px; height:80px; "></td>
+                    <td>
+                        {{ year }}<br />
+                        <span style="font-size:1vw; font-weight:lighter;">No. of years</span>
+                    </td>
+                    <td width="1"><hr style="width:1px; height:80px; "></td>
+                    <td>
+                        {{ revenue }}<br />
+                        <span style="font-size:1vw; font-weight:lighter;">Total Revenue</span>
+                    </td>
+
+                </tr>
+
+            </table>
+        </div>
+        <table id="info_table" cellpadding="10" cellspacing="10" style="text-align:left; font-size:20px; border-collapse:collapse; margin-top:20px;" border="1">
+            <tr style="color:darkslateblue;">
+                <th>Retailer Country</th>
+                <th>Order Method Type</th>
+                <th>Product Line</th>
+                <th>Product Type</th>
+                <th>Year</th>
+                <th>Revenue</th>
+                <th>Quantity</th>
+            </tr>
+            {% for row in excel_data %}
+            <tr>
+
+                <td>{{ row.0 }}</td>
+                <td>{{ row.1 }}</td>
+                <td>{{ row.2 }}</td>
+                <td>{{ row.3 }}</td>
+                <td>{{ row.4 }}</td>
+                <td>{{ row.5 }}</td>
+                <td>{{ row.6 }}</td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+
+
+{% endblock content %}

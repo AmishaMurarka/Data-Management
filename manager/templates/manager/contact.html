@@ -1,0 +1,46 @@
+{% extends 'C:\Users\Amisha\Desktop\SCM\manager\templates\manager\admin_homepage.html' %}
+
+{% block sidebar %}
+<ul>
+    <li><a href="account.html" style="text-align:center; font-size:2vw; margin-bottom:20px; margin-top:10px;">Welcome Admin!</a></li>
+    <li><a href="{% url 'loginpage' %}">Databases</a></li>
+    <li><a href="{% url 'adminorderspage' %}">Orders</a></li>
+    <li><a href="{% url 'admincustomerpage' %}">Customers</a></li>
+    <li><a href="{% url 'adminproductpage' %}">Products</a></li>
+    <li><a href="{% url 'admincalendarpage' %}">Task Schedular</a></li>
+    <li><a class="active" href="{% url 'contactpage' %}">Contact Us</a></li>
+    <li><a href="{% url 'logoutpage' %}">Logout</a></li>
+</ul>
+    {% endblock sidebar %}
+
+{% block content %}
+
+<div align="center" style="padding-top:50px;">
+    <h2 style="color:darkslateblue;">Fill up this from with your query..</h2>
+    {% if mail is True %}
+    <p style="padding:10px; margin:5px;">
+        <font color="blue">
+            <b>We have received your query successfully!<br />Our representative will contact you as soon as possible..</b>
+        </font>
+    </p>
+    {% endif %}
+
+    <div class="container">
+        <form action="{% url 'contactpage' %}" method="post">
+            {% csrf_token %}
+            <br />
+            <input type="text" id="name" name="name" placeholder="Your name.." style="width:50%;">
+            <br />
+            <br />
+            <input type="text" id="country" name="country" placeholder="Enter your country.." style="width:50%;">
+            <br />
+            <br />
+            <textarea id="subject" name="subject" placeholder="What can we help you with.." style="width: 50%; padding: 15px; height: 200px; margin: 5px 0 22px 0; display: inline-block; border: none; background: #f1f1f1;"></textarea>
+            <br />
+            <br />
+            <input type="submit" class="buttons" value="Submit">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'C:\Users\Amisha\Desktop\SCM\manager\templates\manager\admin_homepage.html' %}
+
+    {% block header %}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load staticfiles %}
+<link href="{% static 'fullcalendar-3.9.0/fullcalendar.min.css' %}" rel='stylesheet' type="text/css" />
+<link href="{% static 'fullcalendar-3.9.0/fullcalendar.print.min.css' %}" rel='stylesheet' media='print' type="text/css" />
+<script src="{% static 'fullcalendar-3.9.0/lib/moment.min.js' %}"></script>
+<script src="{% static 'fullcalendar-3.9.0/lib/jquery.min.js' %}"></script>
+<script src="{% static 'fullcalendar-3.9.0/fullcalendar.min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'main_css.css' %}" />
+<script type="text/javascript" src="{% static 'modalscript.js' %}"></script>
+
+<script>
+    var data = "{{ eventdata }}";
+    $(document).ready(function () {
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listWeek'
+            },
+            defaultDate: '2018-03-12',
+            navLinks: true, // can click day/week names to navigate views
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            events: data
+        });
+
+    });
+
+</script>
+
+    {% endblock header %}
+
+{% block sidebar %}
+<ul>
+    <li><a href="account.html" style="text-align:center; font-size:2vw; margin-bottom:20px; margin-top:10px;">Welcome Admin!</a></li>
+    <li><a href="{% url 'loginpage' %}">Databases</a></li>
+    <li><a href="{% url 'adminorderspage' %}">Orders</a></li>
+    <li><a href="{% url 'admincustomerpage' %}">Customers</a></li>
+    <li><a href="{% url 'adminproductpage' %}">Products</a></li>
+    <li><a href="manageusers">Users</a></li>
+    <li><a class="active" href="{% url 'admincalendarpage' %}">Task Schedular</a></li>
+    <li><a href="{% url 'logoutpage' %}">Logout</a></li>
+</ul>
+    {% endblock sidebar %}
+
+{% block content %}
+<div align="center">
+    <div id="calendar">
+    </div>
+</div>
+
+{% endblock content %}

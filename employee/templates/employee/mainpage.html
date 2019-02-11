@@ -1,0 +1,89 @@
+<html>
+<head>
+    <title>
+        MainPage
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'main_css.css' %}" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+    <div class="header">
+        <button><i class="material-icons">mail_outline</i></button>
+        <button><i class="material-icons">event_note</i></button>
+        <button><i class="material-icons">notifications</i></button>
+        <div class="dropdown">
+            <button class="dropbtn"><i class="material-icons">perm_identity</i></button>
+            <div class="dropdown-content">
+                <button>View Account</button>
+                <button>Add customers</button>
+                <button>Change Password</button>
+                <button>Logout</button>
+            </div>
+        </div>
+            <div style="float:left; padding-left:50px; margin-top:15px; color:white;"><font size="6"><b>Welcome {{ username }}!</b></font></div>
+    </div>
+
+    <div class="row">
+        <!--<div class="col-3 menu">
+        <ul>
+            <li><a class="active" href="#home">Dashboard</a></li>
+            <li><a href="#news">Orders</a></li>
+            <li><a href="#contact">Products</a></li>
+            <li><a href="#about">Customer</a></li>
+        </ul>
+    </div>
+    -->
+        <div class="col-9">
+            <table align="center" cellspacing="20">
+                <tr>
+                    <td>
+                        <div class="statistics">
+                            <span class="stat" style="font-weight:bold; font-size:48px; color:darkblue;">
+                                12
+                            </span>
+                            <span class="stat" style=" align-self:center;">
+                                Number of customers
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="statistics">
+                            <span class="stat" style="font-weight:bold; font-size:48px; color:darkblue;">
+                                12
+                            </span>
+                            <span class="stat" style=" align-self:center;">
+                                Number of sales
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="statistics">
+                            <span class="stat" style="font-weight:bold; font-size:48px; color:darkblue;">
+                                12
+                            </span>
+                            <span class="stat" style=" align-self:center;">
+                                Number of Products
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="statistics">
+                            <span class="stat" style="font-weight:bold; font-size:48px; color:darkblue;">
+                                12
+                            </span>
+                            <span class="stat" style=" align-self:center;">
+                                Notifications/Tasks
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+    </div>
+    
+</body>
+</html>

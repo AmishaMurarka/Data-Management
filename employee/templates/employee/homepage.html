@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    {% block header %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load staticfiles %}
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main_css.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'search_filter.js' %}"></script>
+    <script type="text/javascript" src="{% static 'modalscript.js' %}"></script>
+    <script type="text/javascript" src="{% static 'validations.js' %}"></script>
+
+    <title>Customer Data Management</title>
+
+    {% endblock header %}
+</head>
+<body>
+    {% block sidebar %}
+    <ul>
+        <li><a href="account.html" style="text-align:center; font-size:3vw; margin-bottom:20px; margin-top:10px;">Welcome User!</a></li>
+        <li><a class="active" href="{% url 'loginpage' %}">Dashboard</a></li>
+        <li><a href="{% url 'orderspage' %}">Orders</a></li>
+        <li><a href="{% url 'customerpage' %}">Customers</a></li>
+        <li><a href="{% url 'productpage' %}">Products</a></li>
+        <li><a href="{% url 'calendarpage' %}">Task Schedular</a></li>
+        <li><a href="{% url 'logoutpage' %}">Logout</a></li>
+    </ul>
+    {% endblock sidebar %}
+
+    <div class="tabs">
+        {% block content %}
+            <div align="center">
+                <table style="border-collapse:collapse;">
+                    <tr>
+                        <td>
+                            {% load static %}
+                            <img style="padding:10px; cursor:pointer;" src="{% static 'sku_vs_avg_rating.png' %}" width="1000" height="500" alt="Product VS Average Rating Bar Chart" title="Product VS Average Rating Bar Chart"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% load static %}
+                            <img style="padding:10px; cursor:pointer;" src="{% static 'sales_channels.png' %}" width="1000" height="500" alt="Sales Channel Pie Chart" title="Sales Channel Pie Chart"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% load static %}
+                            <img style="padding:10px; cursor:pointer;" src="{% static 'salesbycountry.png' %}" width="1000" height="500" alt="Sales VS Country Bar Chart" title="Sales VS Country Bar Chart"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% load static %}
+                            <img style="padding:10px; cursor:pointer;" src="{% static 'revenue_vs_country.png' %}" width="1000" height="500" alt="Revenue VS Country Line Graph" title="Revenue VS Country Line Graph"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% load static %}
+                            <img style="padding:10px; cursor:pointer;" src="{% static 'units_prod_vs_sold.png' %}" width="1000" height="500" alt="Units Produced vs Sold Bar Chart" title="Units Produced vs Sold Bar Chart"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        {% endblock %}
+    </div>
+
+</body>
+</html>
